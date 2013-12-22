@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency("rails", [">= 3.2.6", "< 5"])
   s.add_dependency("railties", ">= 3.2.6", "< 5")
+  s.add_dependency("enumerize")
   s.add_development_dependency("mocha")
   s.add_development_dependency("faker")
   s.add_development_dependency("rake")
