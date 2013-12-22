@@ -26,6 +26,8 @@ ActiveAdmin.register Survey::Survey do
 
   form do |f|
     f.inputs I18n.t("survey_details") do
+      f.input  :object_type
+      f.input  :object_id
       f.input  :name
       f.input  :description
       f.input  :active, :as => :select, :collection => ["true", "false"]
@@ -34,7 +36,7 @@ ActiveAdmin.register Survey::Survey do
     f.inputs I18n.t("questions") do
       f.has_many :questions do |q|
         q.input :text
-        q.input :type, :as => :select, :collection => Survey::Question.type.options
+        q.input :question_type, :as => :select, :collection => Survey::Question.question_type.options
         q.has_many :options do |a|
           a.input  :text
           a.input  :explanation

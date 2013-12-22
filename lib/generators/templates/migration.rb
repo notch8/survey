@@ -3,6 +3,7 @@ class CreateSurvey < ActiveRecord::Migration
 
     # survey surveys logic
     create_table :survey_surveys do |t|
+      t.belongs_to :object, polymorphic: true
       t.string  :name
       t.text    :description
       t.integer :attempts_number, :default => 0
@@ -15,7 +16,7 @@ class CreateSurvey < ActiveRecord::Migration
     create_table :survey_questions do |t|
       t.integer :survey_id
       t.string  :text
-      t.integer :type
+      t.integer :question_type
 
       t.timestamps
     end

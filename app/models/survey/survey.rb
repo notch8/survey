@@ -4,6 +4,8 @@ class Survey::Survey < ActiveRecord::Base
 
   acceptable_attributes :name, :description,
     :finished,
+    :object_type,
+    :object_id,
     :active,
     :attempts_number,
     :questions_attributes => Survey::Question::AccessibleAttributes
@@ -11,6 +13,7 @@ class Survey::Survey < ActiveRecord::Base
   # relations
   has_many :attempts,  :dependent => :destroy
   has_many :questions, :dependent => :destroy
+  belongs_to :object, polymorphic: true
   accepts_nested_attributes_for :questions,
     :reject_if => ->(q) { q[:text].blank? },
     :allow_destroy => true
