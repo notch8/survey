@@ -34,13 +34,15 @@ ActiveAdmin.register Survey::Survey do
     f.inputs I18n.t("questions") do
       f.has_many :questions do |q|
         q.input :text
+        q.input :type, :as => :select, :collection => Survey::Question.type.options
         q.has_many :options do |a|
           a.input  :text
+          a.input  :explanation
           a.input  :correct
         end
       end
     end
-    f.buttons
+    f.actions
   end
 
 end
