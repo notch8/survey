@@ -4,11 +4,11 @@ class Survey::Question < ActiveRecord::Base
   
   QUESTION_TYPES = { text: 1, radio: 2, checkboxes: 3 }.freeze
   
-  enumerize :type, in: QUESTION_TYPES 
+  enumerize :question_type, in: QUESTION_TYPES 
   
   self.table_name = "survey_questions"
 
-  acceptable_attributes :text, :survey, :type, :options_attributes => Survey::Option::AccessibleAttributes
+  acceptable_attributes :text, :survey, :question_type, :options_attributes => Survey::Option::AccessibleAttributes
 
   # relations
   belongs_to :survey
@@ -18,7 +18,7 @@ class Survey::Question < ActiveRecord::Base
     :allow_destroy => true
 
   # validations
-  validates :type, presence: true
+  validates :question_type, presence: true
   validates :text, :presence => true, :allow_blank => false
 
   def correct_options
