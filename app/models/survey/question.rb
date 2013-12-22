@@ -1,5 +1,11 @@
 class Survey::Question < ActiveRecord::Base
 
+  extend Enumerize
+  
+  QUESTION_TYPES = { text: 1, radio: 2, checkboxes: 3 }.freeze
+  
+  enumerize :type, in: QUESTION_TYPES 
+  
   self.table_name = "survey_questions"
 
   acceptable_attributes :text, :survey, :options_attributes => Survey::Option::AccessibleAttributes
@@ -12,6 +18,7 @@ class Survey::Question < ActiveRecord::Base
     :allow_destroy => true
 
   # validations
+  validates :type, presence: true
   validates :text, :presence => true, :allow_blank => false
 
   def correct_options
